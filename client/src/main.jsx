@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
 import { CartProvider } from './context/CartContext';
 import './index.css';
 
@@ -10,9 +11,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
+        <NotificationProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </NotificationProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

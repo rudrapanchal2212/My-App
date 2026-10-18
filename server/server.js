@@ -18,10 +18,11 @@ const startServer = async () => {
       await seedData(false);
     }
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`====================================================`);
       console.log(`🚀 QuickBite Delivery Server is running on port: ${PORT}`);
       console.log(`🌐 Local API Base URL: http://localhost:${PORT}/api`);
+      console.log(`📱 Phone / Mobile LAN URL: http://192.168.31.42:${PORT}/api`);
       console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`====================================================`);
     });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useNotifications } from '../context/NotificationContext';
 import {
   ShoppingBag,
   User,
@@ -15,15 +16,19 @@ import {
   X,
   ChevronDown,
   Clock,
-  HelpCircle
+  HelpCircle,
+  Bell,
+  Smartphone
 } from 'lucide-react';
 
 const Navbar = () => {
   const { user, role, isAuthenticated, logout } = useAuth();
   const { totalItemCount, setIsCartOpen } = useCart();
+  const { notifications, unreadCount, markAllAsRead, sendTestNotification } = useNotifications();
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-all shadow-sm">
@@ -114,6 +119,84 @@ const Navbar = () => {
                 <Bike className="w-3.5 h-3.5 mr-1 text-emerald-600" />
                 My Deliveries
               </Link>
+            )}
+
+            {/* Notification Bell Button */}
+            {isAuthenticated && (
+              <div className="relative">
+                <button
+                  onClick={() => setNotifOpen(!notifOpen)}
+                  className="relative p-2.5 rounded-xl bg-stone-100 hover:bg-brand-50 hover:text-brand-600 text-slate-700 transition flex items-center justify-center shadow-sm"
+                  aria-label="Notifications"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                      {unreadCount}
+                    </span>
+                  )}
+                </button>
+
+                {/* Notifications Dropdown Panel */}
+                {notifOpen && (
+                  <div
+                    className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-stone-200 py-3 z-50 animate-in fade-in slide-in-from-top-2"
+                    onMouseLeave={() => setNotifOpen(false)}
+                  >
+                    <div className="flex items-center justify-between px-4 pb-2 border-b border-stone-100">
+                      <div className="flex items-center space-x-2">
+                        <Bell className="w-4 h-4 text-brand-500" />
+                        <h4 className="text-xs font-bold text-slate-900">Notifications</h4>
+                      </div>
+                      {unreadCount > 0 && (
+                        <button
+                          onClick={markAllAsRead}
+                          className="text-[11px] font-semibold text-brand-600 hover:text-brand-700"
+                        >
+                          Mark all as read
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Notification items */}
+                    <div className="max-h-72 overflow-y-auto divide-y divide-stone-100">
+                      {notifications.length === 0 ? (
+                        <div className="p-6 text-center text-xs text-slate-400">
+                          No notifications yet
+                        </div>
+                      ) : (
+                        notifications.map((n) => (
+                          <div
+                            key={n._id}
+                            className={`p-3 text-xs hover:bg-stone-50 transition ${
+                              !n.isRead ? 'bg-brand-50/40 font-medium' : ''
+                            }`}
+                          >
+                            <p className="font-bold text-slate-900">{n.title}</p>
+                            <p className="text-slate-600 mt-0.5 text-[11px] leading-relaxed">
+                              {n.message}
+                            </p>
+                            <span className="text-[10px] text-slate-400 mt-1 block">
+                              {new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    {/* Test notification button */}
+                    <div className="px-3 pt-2 border-t border-stone-100">
+                      <button
+                        onClick={sendTestNotification}
+                        className="w-full py-2 px-3 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold rounded-xl transition flex items-center justify-center space-x-1"
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                        <span>Send Test Alert to Phone</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
 
             {/* Cart Button */}

@@ -1,0 +1,15 @@
+{
+  "appId": "com.quickbite.app",
+  "appName": "QuickBite",
+  "webDir": "dist",
+  "server": {
+    "cleartext": true,
+    "androidScheme": "http"
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#ea580c"
+    }
+  }
+}
