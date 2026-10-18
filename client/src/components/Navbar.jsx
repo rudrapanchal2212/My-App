@@ -121,6 +121,17 @@ const Navbar = () => {
               </Link>
             )}
 
+            {/* Download APK Button */}
+            <a
+              href="/QuickBite.apk"
+              download="QuickBite.apk"
+              className="hidden md:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition shadow-sm"
+              title="Download Android APK"
+            >
+              <Smartphone className="w-3.5 h-3.5 text-brand-400" />
+              <span>Get APK</span>
+            </a>
+
             {/* Notification Bell Button */}
             {isAuthenticated && (
               <div className="relative">
@@ -392,6 +403,17 @@ const Navbar = () => {
           >
             Register Your Shop (Vendor)
           </Link>
+          <div className="pt-2">
+            <a
+              href="/QuickBite.apk"
+              download="QuickBite.apk"
+              onClick={() => setMobileNavOpen(false)}
+              className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 bg-slate-900 text-white rounded-xl text-xs font-bold shadow-md hover:bg-slate-800 transition"
+            >
+              <Smartphone className="w-4 h-4 text-brand-400" />
+              <span>Download Android App (.apk)</span>
+            </a>
+          </div>
         </div>
       )}
     </header>

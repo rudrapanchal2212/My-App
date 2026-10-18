@@ -14,7 +14,10 @@ import {
   ShieldCheck,
   Clock,
   Sparkles,
-  Bike
+  Bike,
+  Smartphone,
+  Download,
+  Bell
 } from 'lucide-react';
 
 const categories = [
@@ -114,6 +117,29 @@ const HomePage = () => {
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </button>
               </form>
+
+              {/* Action Buttons: Download APK & Browse */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
+                <a
+                  href="/QuickBite.apk"
+                  download="QuickBite.apk"
+                  className="inline-flex items-center space-x-2.5 px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 transition transform hover:-translate-y-0.5 active:translate-y-0 border border-slate-800"
+                >
+                  <Smartphone className="w-4 h-4 text-brand-400" />
+                  <span>Download Android App (.apk)</span>
+                  <span className="bg-brand-500/20 text-brand-300 text-[10px] px-2 py-0.5 rounded-full font-semibold normal-case">
+                    4.1 MB
+                  </span>
+                </a>
+
+                <Link
+                  to="/shops"
+                  className="inline-flex items-center space-x-1.5 px-5 py-3 rounded-2xl bg-white hover:bg-stone-100 text-slate-700 font-bold text-xs uppercase tracking-wider shadow-sm border border-stone-200 transition"
+                >
+                  <span>Explore Shops</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
 
               {/* Quick stats pills */}
               <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-semibold text-slate-500">
@@ -231,6 +257,40 @@ const HomePage = () => {
             ))}
           </div>
         )}
+      </section>
+
+      {/* App Download Showcase Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <div className="bg-gradient-to-r from-brand-600 via-orange-600 to-amber-600 rounded-3xl p-6 sm:p-10 text-white shadow-xl shadow-brand-500/20 relative overflow-hidden">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div className="md:col-span-8 space-y-3">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <Bell className="w-3.5 h-3.5 text-amber-200" />
+                <span>Live Phone Notifications & Alerts</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+                Get the QuickBite Android App for Your Phone
+              </h3>
+              <p className="text-xs sm:text-sm text-orange-100 max-w-xl leading-relaxed">
+                Download the official APK directly to get real-time order notifications, instant updates when your food is preparing or on the way, and fast 1-tap ordering in Fatepura (389172).
+              </p>
+            </div>
+
+            <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-3 justify-center md:items-end">
+              <a
+                href="/QuickBite.apk"
+                download="QuickBite.apk"
+                className="inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 bg-white text-slate-900 hover:bg-stone-100 font-extrabold text-sm rounded-2xl shadow-xl transition transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <Download className="w-5 h-5 text-brand-600" />
+                <span>Download QuickBite APK</span>
+              </a>
+              <span className="text-[11px] text-white/80 text-center md:text-right font-medium">
+                Android 8.0+ • 4.13 MB • Instant Install
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Multi-Vendor Business Callout */}
